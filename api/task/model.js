@@ -31,6 +31,25 @@ async function getTasks() {
     return updatedTasks
 }
 
+function postTask(task) {
+    return db('tasks').insert(task)
+        .then(async ([task_id]) => {
+            let returnedTask = await db('tasks').where('task_id', task_id).first()
+            let bool = false
+            if (returnedTask.task_completed === 1) {
+                bool = true
+            }
+            let updated = {
+                task_id: returnedTask.task_id,
+                task_description: returnedTask.task_description,
+                task_notes: returnedTask.task_notes,
+                task_completed: bool
+            }
+            return updated
+        })
+}
+
 module.exports = {
-    getTasks
+    getTasks,
+    postTask
 }

@@ -10,6 +10,15 @@ router.get('/', (req, res, next) => {
         .catch(next)
 })
 
+router.post('/', (req, res, next) => {
+    const task = req.body
+    Task.postTask(task)
+        .then(tas => {
+            res.status(201).json(tas)
+        })
+        .catch(next)
+})
+
 router.use((err, req, res, next) => {
     res.status(500).json({
         customMessage: 'somethings wrong inside the tasks router',
