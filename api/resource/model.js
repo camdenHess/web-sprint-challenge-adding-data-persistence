@@ -6,6 +6,15 @@ async function getResources() {
     return resourceRows
 }
 
+function postResource(resource) {
+    return db('resources').insert(resource)
+        .then(async ([resource_id]) => {
+            let returnedResource = await db('resources').where('resource_id', resource_id).first()
+            return returnedResource
+        })
+}
+
 module.exports = {
-    getResources
+    getResources,
+    postResource
 }

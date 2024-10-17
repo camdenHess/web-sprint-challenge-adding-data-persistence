@@ -10,6 +10,15 @@ router.get('/', (req, res, next) => {
         .catch(next)
 })
 
+router.post('/', (req, res, next) => {
+    const resource = req.body
+    Resource.postResource(resource)
+        .then(resour => {
+            res.status(201).json(resour)
+        })
+        .catch(next)
+})
+
 router.use((err, req, res, next) => {
     res.status(500).json({
         customMessage: 'somethings wrong inside the resource router',
