@@ -10,7 +10,16 @@ router.get('/', (req, res, next) => {
         .catch(next)
 })
 
-router.use((err, req, res) => {
+router.post('/', (req, res, next) => {
+    const project = req.body
+    Project.postProject(project)
+        .then(proj => {
+            res.status(201).json(proj)
+        })
+        .catch(next)
+})
+
+router.use((err, req, res, next) => {
     res.status(500).json({
         customMessage: 'somethings wrong inside the project router',
         message: err.message,

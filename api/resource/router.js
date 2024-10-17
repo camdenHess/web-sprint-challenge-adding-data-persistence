@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
         .catch(next)
 })
 
-router.use((err, req, res) => {
+router.use((err, req, res, next) => {
     res.status(500).json({
         customMessage: 'somethings wrong inside the resource router',
         message: err.message,
