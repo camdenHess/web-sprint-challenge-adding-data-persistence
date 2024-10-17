@@ -19,6 +19,7 @@ router.post('/', (req, res, next) => {
         .catch(next)
 })
 
+
 router.use((err, req, res, next) => {
     res.status(500).json({
         customMessage: 'somethings wrong inside the tasks router',
